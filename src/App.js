@@ -7,12 +7,12 @@ import Car from './Car';
 import Rings from './Rings';
 import { Boxes } from './Boxes';
 import {
-  EffectComposer,
-  Bloom,
-  ChromaticAberration,
+  // EffectComposer,
+  // Bloom,
+  // ChromaticAberration,
   // DepthOfField,
 } from "@react-three/postprocessing";
-import { BlendFunction } from 'postprocessing';
+// import { BlendFunction } from 'postprocessing';
 import { FloatingGrid } from './FloatingGrid';
 
 function Carshow(){
@@ -59,8 +59,8 @@ function Carshow(){
         shadow-bias={-0.0001}
       />
       <Ground />
-      <EffectComposer>
-        {/* <DepthOfField focusDistance={0.0035} focalLength={0.01} bokehScale={3} height={480} /> */}
+      {/* <EffectComposer>
+        <DepthOfField focusDistance={0.0035} focalLength={0.01} bokehScale={3} height={480} />
         <Bloom
           blendFunction={BlendFunction.ADD}
           intensity={1.3} // The bloom intensity.
@@ -74,7 +74,7 @@ function Carshow(){
           blendFunction={BlendFunction.NORMAL} // blend mode
           offset={[0.0005, 0.0012]} // color offset
         />
-      </EffectComposer>
+      </EffectComposer> */}
     </>
   );
 }
