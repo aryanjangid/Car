@@ -14,6 +14,7 @@ import {
 } from "@react-three/postprocessing";
 // import { BlendFunction } from 'postprocessing';
 import { FloatingGrid } from './FloatingGrid';
+import Test from './test';
 
 function Carshow(){
   return (
@@ -24,17 +25,18 @@ function Carshow(){
       {/* let color=new color(0,0,0); */}
       <color args={[0,0,0]} attach="background"/>
 
-      <CubeCamera resolution={256} frames={Infinity}>
+      {/* <CubeCamera resolution={256} frames={Infinity}>
         {(texture)=>(
           <>
             <Environment map={texture} />
             <Car/>
           </>
         )}
-      </CubeCamera>
+      </CubeCamera> */}
       <Rings />
+      {/* <Test /> */}
       <FloatingGrid />  
-      <Boxes />
+      {/* <Boxes /> */}
       {/* 
         let spotlight=new spotlight();
         spotlight.intensity=1.5;
@@ -58,7 +60,7 @@ function Carshow(){
         castShadow
         shadow-bias={-0.0001}
       />
-      <Ground />
+      {/* <Ground /> */}
       {/* <EffectComposer>
         <DepthOfField focusDistance={0.0035} focalLength={0.01} bokehScale={3} height={480} />
         <Bloom
