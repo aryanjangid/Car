@@ -2,49 +2,78 @@ import React, { useRef, useEffect } from 'react';
 import { Canvas } from 'react-three-fiber';
 import * as THREE from 'three';
 
-function CircleMesh() {
-  const groupRef = useRef();
+function Test() {
+  const canvasRef = useRef();
 
   useEffect(() => {
-    // Create two perpendicular circles
-    const circleGeometry1 = new THREE.CircleGeometry(10, 32);
-    const circleGeometry2 = new THREE.CircleGeometry(10, 32);
+    // Set up the scene
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
 
-    const material = new THREE.MeshStandardMaterial({
-      emissive: [0.5, 0.5, 0.5],
-      color: [0, 0, 0],
-    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    canvasRef.current.appendChild(renderer.domElement);
 
-    const mesh1 = new THREE.Mesh(circleGeometry1, material);
-    const mesh2 = new THREE.Mesh(circleGeometry2, material);
+    // Create a texture
+    const texture = new THREE.Texture(generateTexture());
+    texture.needsUpdate = true;
 
-    // Rotate one of the circles to make them perpendicular
-    mesh2.rotation.x = Math.PI / 2;
+    // Create materials
+    const materials = [
+      new THREE.MeshBasicMaterial({ color: 0xECECEE, overdraw: 0.5 }),
+      new THREE.MeshBasicMaterial({ map: texture, overdraw: 0.5, transparent: true }),
+    ];
 
-    // Position the circles
-    mesh1.position.set(0, 0, 0);
-    mesh2.position.set(0, 0, 0);
+    // Create a cube and add it to the scene
+    const geometry = new THREE.BoxGeometry();
+    const cube = new THREE.Mesh(geometry, materials);
+    scene.add(cube);
 
-    // Add the meshes to the group
-    groupRef.current.add(mesh1);
-    groupRef.current.add(mesh2);
+    // Set the camera position
+    camera.position.z = 5;
+
+    // Animation function
+    const animate = () => {
+      requestAnimationFrame(animate);
+
+      cube.rotation.x += 0.01;
+      cube.rotation.y += 0.01;
+
+      renderer.render(scene, camera);
+    };
+
+    animate();
+
+    // Generate the texture
+    function generateTexture() {
+      const size = 25;
+      const canvas = document.createElement('canvas');
+      canvas.width = size;
+      canvas.height = size;
+      const context = canvas.getContext('2d');
+
+      const gradient = context.createLinearGradient(0, 0, size, 0);
+      gradient.addColorStop(0, '#f7b000');
+      gradient.addColorStop(0.25, '#dd0080');
+      gradient.addColorStop(0.5, '#622b85');
+      gradient.addColorStop(0.75, '#007dae');
+      gradient.addColorStop(1, '#77c8db');
+      context.fillStyle = gradient;
+      context.fillRect(size / 1.6, 7, size, size);
+
+      return canvas;
+    }
+
+    // Clean up
+    return () => {
+      // Dispose of resources (optional)
+      texture.dispose();
+      materials.forEach((material) => material.dispose());
+      renderer.dispose();
+    };
   }, []);
 
-  return (
-    <group ref={groupRef} position={[-100, -100, -100]}>
-      {/* Your other JSX elements */}
-    </group>
-  );
-}
-
-function Test() {
-  return (
-    // <Canvas>
-    //   <ambientLight />
-    //   <pointLight position={[10, 10, 10]} />
-      <CircleMesh />
-    // </Canvas>
-  );
+  return <div ref={canvasRef}></div>;
 }
 
 export default Test;
