@@ -1,7 +1,7 @@
 import { Canvas } from '@react-three/fiber';
-import React, {Suspense} from 'react';
+import React, { Suspense } from 'react';
 import "./style.css"
-import {CubeCamera, Environment, OrbitControls,PerspectiveCamera} from '@react-three/drei'
+import { CubeCamera, Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import Ground from './Ground';
 import Car from './Car';
 import Rings from './Rings';
@@ -14,27 +14,32 @@ import {
 } from "@react-three/postprocessing";
 // import { BlendFunction } from 'postprocessing';
 import { FloatingGrid } from './FloatingGrid';
+// import { DirectionalLight } from 'drei'; // This is part of 'drei' library, which provides additional helpers for react-three-fiber
 
-function Carshow(){
+import Test from './test';
+// import Test from './test';
+
+function Carshow() {
   return (
     <>
-      <OrbitControls target={[0,0.35,0]} maxPolarAngle={1.45} />
-      <PerspectiveCamera makeDefault fov={50} position={[3,2,5]}/>
-      
-      {/* let color=new color(0,0,0); */}
-      <color args={[0,0,0]} attach="background"/>
+      <OrbitControls target={[0, 0.35, 0]} maxPolarAngle={1.45} enableZoom={false}/>
+      <PerspectiveCamera makeDefault fov={50} position={[10, 5  , 5]} />
 
-      <CubeCamera resolution={256} frames={Infinity}>
+      {/* let color=new color(0,0,0); */}
+      <color args={[0, 0, 0]} attach="background" />
+
+      {/* <CubeCamera resolution={256} frames={Infinity}>
         {(texture)=>(
           <>
             <Environment map={texture} />
             <Car/>
           </>
         )}
-      </CubeCamera>
+      </CubeCamera> */}
       <Rings />
-      <FloatingGrid />  
-      <Boxes />
+      {/* <Test /> */}
+      <FloatingGrid />
+      {/* <Boxes /> */}
       {/* 
         let spotlight=new spotlight();
         spotlight.intensity=1.5;
@@ -59,6 +64,15 @@ function Carshow(){
         shadow-bias={-0.0001}
       />
       <Ground />
+       {/* <directionalLight
+          intensity={1} // Adjust the light intensity as needed
+          position={[5, 10, 5]} // Set the light's position
+          castShadow // Enable shadow casting
+          color="#F32053"
+        /> */}
+                {/* <directionalLight position={[0 , 0, 0]} intensity={1} color="#F32053" />
+        <directionalLight position={[-4, -5, -2]} intensity={1} color="#A8ECF0" />
+        <directionalLight position={[4, -5, 2]} intensity={1} color="#407BFF" />  */}
       {/* <EffectComposer>
         <DepthOfField focusDistance={0.0035} focalLength={0.01} bokehScale={3} height={480} />
         <Bloom
@@ -81,11 +95,14 @@ function Carshow(){
 
 function App() {
   return (
-    <Suspense fallback={null}>
-      <Canvas shadows>
-        <Carshow />
+    <Canvas shadows>
+        {/* Add a directional light */}
+        
+        <Suspense fallback={null}>
+          <Carshow />
+          {/* Add other components */}
+        </Suspense>
       </Canvas>
-    </Suspense>
   );
 }
 
