@@ -64,12 +64,12 @@ function Carshow() {
         shadow-bias={-0.0001}
       />
       <Ground />
-       <directionalLight
+       {/* <directionalLight
           intensity={1} // Adjust the light intensity as needed
           position={[5, 10, 5]} // Set the light's position
           castShadow // Enable shadow casting
           color="#F32053"
-        />
+        /> */}
                 {/* <directionalLight position={[0 , 0, 0]} intensity={1} color="#F32053" />
         <directionalLight position={[-4, -5, -2]} intensity={1} color="#A8ECF0" />
         <directionalLight position={[4, -5, 2]} intensity={1} color="#407BFF" />  */}
