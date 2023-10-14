@@ -42,10 +42,10 @@ export default function Rings() {
             varying vec2 vUv;
             
             void main() {
-              vec3 final = mix(color2, mix(color1, mix(color1, mix(color3, mix(color3, mix(color3, mix(color3, mix(color3, mix(color1, mix(color1, mix(color1, color2, vUv.x), vUv.x), vUv.x), vUv.x), vUv.x) ,vUv.x), vUv.x), vUv.x), vUv.x), vUv.x), vUv.x);
+              vec3 final = mix(color2, mix(color1, mix(color3, mix(color3, mix(color3, mix(color3, mix(color1, mix(color1, mix(color1, mix(color1, mix(color1, color2, vUv.x), vUv.x), vUv.x), vUv.x), vUv.x) ,vUv.x), vUv.x), vUv.x), vUv.x), vUv.x), vUv.x);
 
 
-            gl_FragColor = vec4(final,1.0) * 1.0;
+            gl_FragColor = vec4(final,1.0) * 3.0;
             }
             `,
   };
@@ -90,10 +90,10 @@ export default function Rings() {
           
           void main() {
             vec2 normalizedPixel = gl_FragCoord.xy/10.0;
-            vec3 final = mix(color2, mix(color1, mix(color1, mix(color3, mix(color3, mix(color3, mix(color3, mix(color3, mix(color1, mix(color1, mix(color1, color2, vUv.x), vUv.x), vUv.x), vUv.x), vUv.x) ,vUv.x), vUv.x), vUv.x), vUv.x), vUv.x), vUv.x);
+            vec3 final = mix(color2, mix(color1, mix(color3, mix(color3, mix(color3, mix(color3, mix(color1, mix(color1, mix(color1, mix(color1, mix(color1, color2, vUv.x), vUv.x), vUv.x), vUv.x), vUv.x) ,vUv.x), vUv.x), vUv.x), vUv.x), vUv.x), vUv.x);
 
 
-            gl_FragColor = vec4(final,1.0) * 1.0;
+            gl_FragColor = vec4(final,1.0) * 3.0;
           }
           `,
   };
@@ -103,14 +103,14 @@ export default function Rings() {
 
 
   useFrame(() => {
-    // if (meshRef1.current) {
-    //   meshRef1.current.rotation.x += 0.005; // Adjust the rotation speed as needed
-    //   meshRef1.current.rotation.y += 0.005; // Adjust the rotation speed as needed
-    // }
-    // if (meshRef2.current) {
-    //   meshRef2.current.rotation.x -= 0.005; // Adjust the rotation speed as needed
-    //   meshRef2.current.rotation.y -= 0.005; // Adjust the rotation speed as needed
-    // }
+    if (meshRef1.current) {
+      meshRef1.current.rotation.x += 0.005; // Adjust the rotation speed as needed
+      meshRef1.current.rotation.y += 0.005; // Adjust the rotation speed as needed
+    }
+    if (meshRef2.current) {
+      meshRef2.current.rotation.x -= 0.005; // Adjust the rotation speed as needed
+      meshRef2.current.rotation.y -= 0.005; // Adjust the rotation speed as needed
+    }
   });
 
   return (
